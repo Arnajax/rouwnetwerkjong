@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lezen over rouw en verlies — Rouwnetwerk Jong</title>
+  <meta name="description" content="Boeken en gedichten die kunnen helpen bij het verwerken van rouw en verlies. Samengesteld voor jongeren door Rouwnetwerk Jong.">
+  <link rel="stylesheet" href="../../styles.css">
+  <style>
+    /* ── Page Hero ── */
+    .page-hero {
+      background: var(--grad-hero);
+      padding: 140px 0 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-inner { max-width: 640px; }
+    .page-hero h1 { margin: 12px 0 20px; }
+    .page-hero p { font-size: 16px; line-height: 1.8; max-width: 540px; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a { color: var(--text-muted); transition: color 0.15s; }
+    .breadcrumb a:hover { color: var(--text-primary); }
+    .breadcrumb-sep { opacity: 0.5; }
+
+    /* ── Sub-category Cards ── */
+    .subcategory-section { background: #fff; padding: 64px 0 0; }
+    .subcategory-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .subcategory-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .subcategory-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .subcategory-header {
+      padding: 36px 28px 28px;
+      position: relative;
+      overflow: hidden;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 14px;
+    }
+    .subcategory-header.peach { background: var(--grad-peach); }
+    .subcategory-header.lav   { background: var(--grad-lav); }
+    .sub-blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.45;
+      filter: blur(28px);
+    }
+    .sub-blob-1 { width: 120px; height: 120px; background: rgba(255,255,255,0.8); top: -30px; right: -20px; }
+    .sub-blob-2 { width: 70px;  height: 70px;  background: rgba(255,255,255,0.5); bottom: 10px; left: 20px; }
+    .subcategory-icon {
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,0.65);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .subcategory-header h3 {
+      font-size: 1.35rem;
+      position: relative;
+      z-index: 2;
+    }
+    .subcategory-body {
+      padding: 20px 28px 28px;
+      background: #fff;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .subcategory-body p { font-size: 14px; line-height: 1.7; flex: 1; }
+    .sub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      transition: gap 0.15s;
+    }
+    .subcategory-card:hover .sub-link { gap: 10px; }
+
+    /* ── Intro text ── */
+    .lezen-intro {
+      background: #fff;
+      padding: 56px 0 16px;
+    }
+    .intro-quote {
+      background: var(--grad-peach);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 36px 40px;
+      max-width: 680px;
+    }
+    .intro-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 15.5px;
+      line-height: 1.85;
+      color: var(--text-primary);
+    }
+
+    /* ── Featured Books ── */
+    .featured-section { background: #fff; padding: 56px 0 96px; }
+    .featured-section h2 { margin-bottom: 8px; }
+    .featured-section > .container > p { max-width: 560px; margin-bottom: 40px; }
+    .books-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 560px) { .books-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .books-grid { grid-template-columns: repeat(3, 1fr); } }
+    .book-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .book-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .book-cover {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .book-cover.c1 { background: linear-gradient(135deg,#F2DED4,#DFCFC8); }
+    .book-cover.c2 { background: linear-gradient(135deg,#DDE3D6,#C8D8B8); }
+    .book-cover.c3 { background: linear-gradient(135deg,#E8DDD6,#D8C8BE); }
+    .book-cover.c4 { background: linear-gradient(135deg,#F0E8D0,#E8D8B8); }
+    .book-cover.c5 { background: linear-gradient(135deg,#E0DDD6,#D0C8C0); }
+    .book-cover.c6 { background: linear-gradient(135deg,#EAE0DA,#D8CECC); }
+    .book-cover-icon {
+      opacity: 0.35;
+    }
+    .book-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .book-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .book-body h3 {
+      font-size: 0.98rem;
+      font-family: 'Playfair Display', serif;
+      line-height: 1.4;
+    }
+    .book-author { font-size: 13px; color: var(--text-muted); }
+    .book-body p { font-size: 13px; color: var(--text-body); line-height: 1.6; flex: 1; }
+
+    /* ── Gedichten CTA ── */
+    .gedichten-cta-section { background: var(--bg); padding: 0 0 96px; }
+    .gedichten-cta {
+      background: var(--grad-lav);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    @media (min-width: 640px) {
+      .gedichten-cta { flex-direction: row; align-items: center; gap: 40px; }
+    }
+    .gedichten-cta-text { flex: 1; }
+    .gedichten-cta-text h3 { margin-bottom: 10px; }
+    .gedichten-cta-text p { font-size: 14px; margin: 0; line-height: 1.75; }
+    .gedichten-cta-icon {
+      flex-shrink: 0;
+      width: 72px; height: 72px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gedichten-cta-actions { flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Rouwnetwerk Jong</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" aria-expanded="false">
+          Hulpmiddelen
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="#6B6058" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/hulpmiddelen/">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2" stroke="#4A433B" stroke-width="1.2"/><path d="M4 5h6M4 7.5h6M4 10h4" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Overzicht
+          </a>
+          <a href="/hulpmiddelen/lezen/">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2C2 2 5 1 7 1C9 1 12 2 12 2V12C12 12 9 11 7 11C5 11 2 12 2 12V2Z" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/><path d="M7 1V11" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Lezen
+          </a>
+          <a href="/hulpmiddelen/luisteren/">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 5.5C4 3.57 5.34 2 7 2C8.66 2 10 3.57 10 5.5V8" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/><rect x="2" y="7.5" width="3" height="4" rx="1.5" stroke="#4A433B" stroke-width="1.2"/><rect x="9" y="7.5" width="3" height="4" rx="1.5" stroke="#4A433B" stroke-width="1.2"/></svg>
+            Luisteren
+          </a>
+          <a href="/hulpmiddelen/kijken/">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2.5" width="12" height="8" rx="2" stroke="#4A433B" stroke-width="1.2"/><path d="M5.5 5L9 6.5L5.5 8V5Z" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Kijken
+          </a>
+        </div>
+      </div>
+      <a href="/praatgroepen/">Praatgroepen</a>
+      <a href="/het-team/">Het Team</a>
+      <a href="/verhalen/">Verhalen</a>
+      <a href="/contact/">Contact</a>
+      <a href="/lid-worden/" class="btn btn-primary btn-sm">Lid Worden</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="/">Home</a>
+    <span class="mobile-section-label">Hulpmiddelen</span>
+    <a href="/hulpmiddelen/" class="mobile-sub">Overzicht</a>
+    <a href="/hulpmiddelen/lezen/" class="mobile-sub">Lezen</a>
+    <a href="/hulpmiddelen/luisteren/" class="mobile-sub">Luisteren</a>
+    <a href="/hulpmiddelen/kijken/" class="mobile-sub">Kijken</a>
+    <a href="/praatgroepen/">Praatgroepen</a>
+    <a href="/het-team/">Het Team</a>
+    <a href="/verhalen/">Verhalen</a>
+    <a href="/contact/">Contact</a>
+    <a href="/lid-worden/" class="btn btn-primary">Lid Worden</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero grain">
+  <div class="container">
+    <div class="breadcrumb fade-up">
+      <a href="/">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="/hulpmiddelen/">Hulpmiddelen</a>
+      <span class="breadcrumb-sep">/</span>
+      <span>Lezen</span>
+    </div>
+    <div class="page-hero-inner fade-up">
+      <span class="section-label">Hulpmiddelen / Lezen</span>
+      <h1>Lezen over rouw en verlies</h1>
+      <p>Wil jij je wat verder verdiepen in onderzoek naar rouw? Of lees je liever een persoonlijk verhaal? Spreekt een kinderboek jou soms meer aan? Hieronder vind je een overzicht van boeken en gedichten die kunnen helpen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO QUOTE -->
+<section class="lezen-intro">
+  <div class="container">
+    <div class="intro-quote fade-up">
+      <p>Lezen over rouw kan helpen om woorden te vinden voor iets wat moeilijk te omschrijven is. Soms herkent een zin in een boek precies wat jij voelt &mdash; en dat kan enorm opluchten. Kijk rustig wat bij jou past op dit moment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SUB-CATEGORIES -->
+<section class="subcategory-section">
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label">Categorieën</span>
+      <h2>Kies een categorie</h2>
+    </div>
+    <div class="subcategory-grid">
+      <a href="./boeken/" class="subcategory-card fade-up">
+        <div class="subcategory-header peach">
+          <div class="sub-blob sub-blob-1"></div>
+          <div class="sub-blob sub-blob-2"></div>
+          <div class="subcategory-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M3 4C3 4 9 2 13 2C17 2 23 4 23 4V22C23 22 17 20 13 20C9 20 3 22 3 22V4Z" stroke="#4A433B" stroke-width="1.4" stroke-linecap="round"/><path d="M13 2V20" stroke="#4A433B" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Boeken</h3>
+        </div>
+        <div class="subcategory-body">
+          <p>Van persoonlijke verhalen tot wetenschappelijk onderzoek: er is een boek voor elk type lezer. We hebben een selectie gemaakt van titels die jongeren en begeleiders aanraden.</p>
+          <span class="sub-link">Bekijk alle boeken &rarr;</span>
+        </div>
+      </a>
+      <a href="./gedichten/" class="subcategory-card fade-up delay-1">
+        <div class="subcategory-header lav">
+          <div class="sub-blob sub-blob-1"></div>
+          <div class="sub-blob sub-blob-2"></div>
+          <div class="subcategory-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M6 7H20" stroke="#4A433B" stroke-width="1.4" stroke-linecap="round"/><path d="M6 11H16" stroke="#4A433B" stroke-width="1.4" stroke-linecap="round"/><path d="M6 15H13" stroke="#4A433B" stroke-width="1.4" stroke-linecap="round"/><path d="M6 19H10" stroke="#4A433B" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Gedichten</h3>
+        </div>
+        <div class="subcategory-body">
+          <p>Een gedicht kan soms in een paar regels zeggen wat een heel boek niet kan. Onze gedichtenselectie is samengesteld voor momenten waarop je behoefte hebt aan iets kleins maar krachtigs.</p>
+          <span class="sub-link">Bekijk alle gedichten &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED BOOKS -->
+<section class="featured-section">
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label">Uitgelicht</span>
+      <h2>Aanbevolen boeken</h2>
+      <p style="max-width:560px;margin-top:12px;margin-bottom:40px;">Een greep uit onze boekenlijst &mdash; geselecteerd door leden en vrijwilligers van Rouwnetwerk Jong. Bekijk de volledige lijst op de boekenpagina.</p>
+    </div>
+    <div class="books-grid">
+
+      <div class="book-card fade-up">
+        <div class="book-cover c1">
+          <svg class="book-cover-icon" width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M6 8C6 8 18 5 24 5C30 5 42 8 42 8V40C42 40 30 37 24 37C18 37 6 40 6 40V8Z" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/><path d="M24 5V37" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="book-body">
+          <span class="book-tag">Non-fictie</span>
+          <h3>Van Harte Gecondoleerd</h3>
+          <p class="book-author">Manu Keirse</p>
+          <p>Een warm en toegankelijk boek dat antwoord geeft op vragen rondom rouw en verlies, voor zowel de rouwende als de omgeving.</p>
+        </div>
+      </div>
+
+      <div class="book-card fade-up delay-1">
+        <div class="book-cover c2">
+          <svg class="book-cover-icon" width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M6 8C6 8 18 5 24 5C30 5 42 8 42 8V40C42 40 30 37 24 37C18 37 6 40 6 40V8Z" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/><path d="M24 5V37" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="book-body">
+          <span class="book-tag">Roman</span>
+          <h3>De Dingen Die Je Vergeet</h3>
+          <p class="book-author">Joost de Vries</p>
+          <p>Een indringende roman over verlies, herinneringen en hoe we omgaan met de mensen die we kwijtraken.</p>
+        </div>
+      </div>
+
+      <div class="book-card fade-up delay-2">
+        <div class="book-cover c3">
+          <svg class="book-cover-icon" width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M6 8C6 8 18 5 24 5C30 5 42 8 42 8V40C42 40 30 37 24 37C18 37 6 40 6 40V8Z" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/><path d="M24 5V37" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="book-body">
+          <span class="book-tag">Non-fictie</span>
+          <h3>Aan Tranen Heb Je Toch Niks</h3>
+          <p class="book-author">Riet Fiddelaers-Jaspers</p>
+          <p>Een praktisch boek voor jongeren die rouwen: eerlijk, begripvol en zonder omwegen over wat rouw echt met je doet.</p>
+        </div>
+      </div>
+
+      <div class="book-card fade-up delay-3">
+        <div class="book-cover c4">
+          <svg class="book-cover-icon" width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M6 8C6 8 18 5 24 5C30 5 42 8 42 8V40C42 40 30 37 24 37C18 37 6 40 6 40V8Z" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/><path d="M24 5V37" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="book-body">
+          <span class="book-tag">Non-fictie</span>
+          <h3>Vingerafdruk Van Verdriet</h3>
+          <p class="book-author">Riet Fiddelaers-Jaspers</p>
+          <p>Over hoe verlies een blijvend spoor nalaat en hoe je leert leven met de afdruk die iemand heeft achtergelaten in jouw leven.</p>
+        </div>
+      </div>
+
+      <div class="book-card fade-up">
+        <div class="book-cover c5">
+          <svg class="book-cover-icon" width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M6 8C6 8 18 5 24 5C30 5 42 8 42 8V40C42 40 30 37 24 37C18 37 6 40 6 40V8Z" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/><path d="M24 5V37" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="book-body">
+          <span class="book-tag">Professioneel</span>
+          <h3>Helpen Bij Verlies en Verdriet</h3>
+          <p class="book-author">Manu Keirse</p>
+          <p>Een gids voor mensen die iemand in rouw willen ondersteunen &mdash; ook nuttig als je wilt begrijpen wat een naaste doormaakt.</p>
+        </div>
+      </div>
+
+      <div class="book-card fade-up delay-1">
+        <div class="book-cover c6">
+          <svg class="book-cover-icon" width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M6 8C6 8 18 5 24 5C30 5 42 8 42 8V40C42 40 30 37 24 37C18 37 6 40 6 40V8Z" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/><path d="M24 5V37" stroke="#4A433B" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="book-body">
+          <span class="book-tag">Poëzie / Essay</span>
+          <h3>Verdriet Is Het Ding Met Veren</h3>
+          <p class="book-author">Max Porter</p>
+          <p>Een poëtisch proza-werk dat rouw beschrijft op een manier die anders is dan al het andere &mdash; rauw, inventief en diep menselijk.</p>
+        </div>
+      </div>
+
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:40px;" class="fade-up">
+      <a href="./boeken/" class="btn btn-outline">Bekijk alle boeken</a>
+    </div>
+  </div>
+</section>
+
+<!-- GEDICHTEN CTA -->
+<section class="gedichten-cta-section">
+  <div class="container">
+    <div class="gedichten-cta fade-up">
+      <div class="gedichten-cta-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M8 10H24" stroke="#4A433B" stroke-width="1.5" stroke-linecap="round"/><path d="M8 15H20" stroke="#4A433B" stroke-width="1.5" stroke-linecap="round"/><path d="M8 20H15" stroke="#4A433B" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="gedichten-cta-text">
+        <h3>Gedichten over rouw</h3>
+        <p>Gedichten kunnen verdriet verwoorden op een manier die proza niet kan. Ze zijn kort, maar kunnen lang bijblijven. In onze gedichtenselectie vind je teksten van Nederlandse en internationale dichters die weten wat verlies is &mdash; voor de momenten dat woorden te groot zijn, maar een regel voldoende.</p>
+      </div>
+      <div class="gedichten-cta-actions">
+        <a href="./gedichten/" class="btn btn-primary">Bekijk gedichten</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">Rouwnetwerk Jong</a>
+        <p>Een veilige, warme plek voor jongeren die rouwen. Non-profit, gedreven door vrijwilligers.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/rouwnetwerkjong/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="3.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/><circle cx="8" cy="8" r="2.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/><circle cx="11.5" cy="4.5" r="0.6" fill="rgba(255,255,255,0.7)"/></svg>
+          </a>
+          <a href="https://www.facebook.com/rouwnetwerkjong" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/><path d="M9.5 6H8.75C8.47 6 8.25 6.22 8.25 6.5V8H9.75L9.5 9.5H8.25V13" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/rouwnetwerk-jong/" class="social-btn" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/><path d="M5 7V11M5 5.5V5.49" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/><path d="M8 11V8.5C8 7.67 8.67 7 9.5 7C10.33 7 11 7.67 11 8.5V11" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigatie</h4>
+        <a href="/">Home</a>
+        <a href="/hulpmiddelen/">Hulpmiddelen</a>
+        <a href="/praatgroepen/">Praatgroepen</a>
+        <a href="/verhalen/">Verhalen</a>
+        <a href="/het-team/">Het Team</a>
+        <a href="/lid-worden/">Lid Worden</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@rouwnetwerkjong.nl">info@rouwnetwerkjong.nl</a>
+        <a href="mailto:praatgroep@rouwnetwerkjong.nl">praatgroep@rouwnetwerkjong.nl</a>
+        <div style="margin-top:16px"><h4>Links</h4>
+          <a href="/contact/">Contact</a>
+          <a href="https://rouwnetwerkjong.nl/privacyverklaring/" target="_blank" rel="noopener">Privacyverklaring</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024 Rouwnetwerk Jong. Alle rechten voorbehouden.</span>
+      <span>Non-profitorganisatie &middot; Gedreven door vrijwilligers</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', open);
+});
+document.querySelectorAll('.nav-mobile a').forEach(link => {
+  link.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', false); });
+});
+document.addEventListener('click', e => { if (!nav.contains(e.target)) { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); } });
+const fadeEls = document.querySelectorAll('.fade-up');
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+fadeEls.forEach(el => obs.observe(el));
+const path = window.location.pathname;
+document.querySelectorAll('.nav-links a, .nav-dropdown-menu a').forEach(a => {
+  if (a.getAttribute('href') === path || (path.startsWith(a.getAttribute('href')) && a.getAttribute('href') !== '/')) {
+    a.classList.add('active');
+  }
+});
+document.querySelectorAll('.nav-dropdown-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', !expanded);
+  });
+});
+</script>
+</body>
+</html>

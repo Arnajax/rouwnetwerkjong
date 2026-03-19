@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hulpmiddelen — Rouwnetwerk Jong</title>
+  <meta name="description" content="Overzicht van hulpmiddelen voor jongeren die rouwen: boeken, gedichten, podcasts, documentaires en praktische informatie.">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    /* ── Page Hero ── */
+    .page-hero {
+      background: var(--grad-hero);
+      padding: 140px 0 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-inner { max-width: 640px; }
+    .page-hero h1 { margin: 12px 0 20px; }
+    .page-hero p { font-size: 16px; line-height: 1.8; max-width: 520px; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .breadcrumb a { color: var(--text-muted); transition: color 0.15s; }
+    .breadcrumb a:hover { color: var(--text-primary); }
+    .breadcrumb-sep { opacity: 0.5; }
+
+    /* ── Intro text section ── */
+    .intro-section { background: #fff; padding: 56px 0 0; }
+    .intro-box {
+      background: var(--grad-lav);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 36px 40px;
+      max-width: 740px;
+    }
+    .intro-box p {
+      font-size: 15.5px;
+      line-height: 1.85;
+      color: var(--text-primary);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    /* ── Category Cards ── */
+    .categories-section { background: #fff; padding: 56px 0 96px; }
+    .categories-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+    @media (min-width: 900px) {
+      .categories-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .category-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      background: #fff;
+    }
+    .category-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .category-card-header {
+      padding: 32px 24px 24px;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .category-card-header.peach { background: var(--grad-peach); }
+    .category-card-header.yellow { background: linear-gradient(135deg,#F5E8C0,#F0DDA8); }
+    .category-card-header.lav { background: var(--grad-lav); }
+    .category-card-header.sage { background: var(--grad-sage); }
+    .category-blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.4;
+      filter: blur(24px);
+    }
+    .category-blob-1 {
+      width: 100px; height: 100px;
+      background: rgba(255,255,255,0.7);
+      top: -20px; right: -20px;
+    }
+    .category-blob-2 {
+      width: 60px; height: 60px;
+      background: rgba(255,255,255,0.5);
+      bottom: 10px; left: 10px;
+    }
+    .category-icon {
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,0.65);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .category-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      position: relative;
+      z-index: 2;
+    }
+    .category-card-body {
+      padding: 20px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .category-subtitle {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .category-card-body p {
+      font-size: 13.5px;
+      color: var(--text-body);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .category-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-top: 8px;
+      transition: gap 0.15s;
+    }
+    .category-card:hover .category-link { gap: 10px; }
+
+    /* ── Bottom CTA ── */
+    .bottom-cta-section { background: var(--bg); padding: 72px 0; }
+    .bottom-cta-inner {
+      background: var(--grad-warm);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+    }
+    @media (min-width: 640px) {
+      .bottom-cta-inner {
+        flex-direction: row;
+        text-align: left;
+        gap: 40px;
+      }
+    }
+    .bottom-cta-text { flex: 1; }
+    .bottom-cta-text h3 { margin-bottom: 8px; }
+    .bottom-cta-text p { font-size: 14px; margin: 0; }
+    .bottom-cta-actions { flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Rouwnetwerk Jong</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" aria-expanded="false">
+          Hulpmiddelen
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="#6B6058" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/hulpmiddelen/">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2" stroke="#4A433B" stroke-width="1.2"/><path d="M4 5h6M4 7.5h6M4 10h4" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Overzicht
+          </a>
+          <a href="/hulpmiddelen/lezen/">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2C2 2 5 1 7 1C9 1 12 2 12 2V12C12 12 9 11 7 11C5 11 2 12 2 12V2Z" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/><path d="M7 1V11" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Lezen
+          </a>
+          <a href="/hulpmiddelen/luisteren/">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 5.5C4 3.57 5.34 2 7 2C8.66 2 10 3.57 10 5.5V8" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/><rect x="2" y="7.5" width="3" height="4" rx="1.5" stroke="#4A433B" stroke-width="1.2"/><rect x="9" y="7.5" width="3" height="4" rx="1.5" stroke="#4A433B" stroke-width="1.2"/></svg>
+            Luisteren
+          </a>
+          <a href="/hulpmiddelen/kijken/">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2.5" width="12" height="8" rx="2" stroke="#4A433B" stroke-width="1.2"/><path d="M5.5 5L9 6.5L5.5 8V5Z" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Kijken
+          </a>
+        </div>
+      </div>
+      <a href="/praatgroepen/">Praatgroepen</a>
+      <a href="/het-team/">Het Team</a>
+      <a href="/verhalen/">Verhalen</a>
+      <a href="/contact/">Contact</a>
+      <a href="/lid-worden/" class="btn btn-primary btn-sm">Lid Worden</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="/">Home</a>
+    <span class="mobile-section-label">Hulpmiddelen</span>
+    <a href="/hulpmiddelen/" class="mobile-sub">Overzicht</a>
+    <a href="/hulpmiddelen/lezen/" class="mobile-sub">Lezen</a>
+    <a href="/hulpmiddelen/luisteren/" class="mobile-sub">Luisteren</a>
+    <a href="/hulpmiddelen/kijken/" class="mobile-sub">Kijken</a>
+    <a href="/praatgroepen/">Praatgroepen</a>
+    <a href="/het-team/">Het Team</a>
+    <a href="/verhalen/">Verhalen</a>
+    <a href="/contact/">Contact</a>
+    <a href="/lid-worden/" class="btn btn-primary">Lid Worden</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero grain">
+  <div class="container">
+    <div class="breadcrumb fade-up">
+      <a href="/">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <span>Hulpmiddelen</span>
+    </div>
+    <div class="page-hero-inner fade-up">
+      <span class="section-label">Hulpmiddelen</span>
+      <h1>Steun die bij jou past</h1>
+      <p>Of je nu wilt lezen, luisteren of kijken &mdash; hier vind je materiaal dat je kan helpen bij het omgaan met rouw en verlies. Samengesteld door mensen die begrijpen hoe dat voelt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro-section">
+  <div class="container">
+    <div class="intro-box fade-up">
+      <p>Dit is de pagina vol met informatie en inspiratie. Kijk rustig rond welke hulpmiddelen jou aanspreken en kunnen ondersteunen. We snappen dat je hier niet wilt zijn, maar het is goed dat je er bent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories-section">
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label">Categorieën</span>
+      <h2>Wat wil jij verkennen?</h2>
+      <p style="max-width:540px;margin-top:12px;">We hebben hulpmiddelen verzameld in vier categorieën. Elke categorie biedt een andere manier om met rouw in contact te komen &mdash; kies wat op dit moment het beste bij je past.</p>
+    </div>
+    <div class="categories-grid">
+
+      <!-- Lezen -->
+      <a href="/hulpmiddelen/lezen/" class="category-card fade-up">
+        <div class="category-card-header peach">
+          <div class="category-blob category-blob-1"></div>
+          <div class="category-blob category-blob-2"></div>
+          <div class="category-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M3 4C3 4 9 2 13 2C17 2 23 4 23 4V22C23 22 17 20 13 20C9 20 3 22 3 22V4Z" stroke="#4A433B" stroke-width="1.4" stroke-linecap="round"/><path d="M13 2V20" stroke="#4A433B" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <span class="category-card-title">Lezen</span>
+        </div>
+        <div class="category-card-body">
+          <span class="category-subtitle">Boeken &amp; gedichten</span>
+          <p>Verdiep je in verhalen en gedichten die rouw beschrijven op een manier die je misschien zelf niet onder woorden kon brengen.</p>
+          <span class="category-link">Bekijken &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Luisteren -->
+      <a href="/hulpmiddelen/luisteren/" class="category-card fade-up delay-1">
+        <div class="category-card-header yellow">
+          <div class="category-blob category-blob-1"></div>
+          <div class="category-blob category-blob-2"></div>
+          <div class="category-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M7 10C7 6.69 9.69 4 13 4C16.31 4 19 6.69 19 10V15" stroke="#4A433B" stroke-width="1.4" stroke-linecap="round"/><rect x="3.5" y="14" width="5.5" height="7.5" rx="2.75" stroke="#4A433B" stroke-width="1.4"/><rect x="17" y="14" width="5.5" height="7.5" rx="2.75" stroke="#4A433B" stroke-width="1.4"/></svg>
+          </div>
+          <span class="category-card-title">Luisteren</span>
+        </div>
+        <div class="category-card-body">
+          <span class="category-subtitle">Podcasts</span>
+          <p>Luister naar podcasts over rouw, verlies en herstel &mdash; voor onderweg, thuis of als je even niet kunt lezen.</p>
+          <span class="category-link">Bekijken &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Kijken -->
+      <a href="/hulpmiddelen/kijken/" class="category-card fade-up delay-2">
+        <div class="category-card-header lav">
+          <div class="category-blob category-blob-1"></div>
+          <div class="category-blob category-blob-2"></div>
+          <div class="category-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="2" y="4" width="22" height="15" rx="3.5" stroke="#4A433B" stroke-width="1.4"/><path d="M10 9L17 12L10 15V9Z" stroke="#4A433B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="category-card-title">Kijken</span>
+        </div>
+        <div class="category-card-body">
+          <span class="category-subtitle">Documentaires</span>
+          <p>Documentaires die rouw en verlies in beeld brengen &mdash; soms is zien begrijpen.</p>
+          <span class="category-link">Bekijken &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Regelen -->
+      <a href="/hulpmiddelen/" class="category-card fade-up delay-3">
+        <div class="category-card-header sage">
+          <div class="category-blob category-blob-1"></div>
+          <div class="category-blob category-blob-2"></div>
+          <div class="category-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="9" stroke="#4A433B" stroke-width="1.4"/><path d="M13 8V13.5L16.5 15.5" stroke="#4A433B" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <span class="category-card-title">Regelen</span>
+        </div>
+        <div class="category-card-body">
+          <span class="category-subtitle">Hulp &amp; praktische info</span>
+          <p>Praktische informatie over zaken die geregeld moeten worden na een overlijden. Voor als je het hoofd er even niet bij kunt houden.</p>
+          <span class="category-link">Bekijken &rarr;</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta-section">
+  <div class="container">
+    <div class="bottom-cta-inner fade-up">
+      <div class="bottom-cta-text">
+        <h3>Iets missen of aanvullen?</h3>
+        <p>Heb je een boek, podcast of documentaire die jou heeft geholpen en die je hier niet ziet staan? We horen het graag. Stuur ons een bericht en we voegen het toe.</p>
+      </div>
+      <div class="bottom-cta-actions">
+        <a href="/contact/" class="btn btn-primary">Stuur een bericht</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">Rouwnetwerk Jong</a>
+        <p>Een veilige, warme plek voor jongeren die rouwen. Non-profit, gedreven door vrijwilligers.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/rouwnetwerkjong/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="3.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/><circle cx="8" cy="8" r="2.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/><circle cx="11.5" cy="4.5" r="0.6" fill="rgba(255,255,255,0.7)"/></svg>
+          </a>
+          <a href="https://www.facebook.com/rouwnetwerkjong" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/><path d="M9.5 6H8.75C8.47 6 8.25 6.22 8.25 6.5V8H9.75L9.5 9.5H8.25V13" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/rouwnetwerk-jong/" class="social-btn" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/><path d="M5 7V11M5 5.5V5.49" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/><path d="M8 11V8.5C8 7.67 8.67 7 9.5 7C10.33 7 11 7.67 11 8.5V11" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigatie</h4>
+        <a href="/">Home</a>
+        <a href="/hulpmiddelen/">Hulpmiddelen</a>
+        <a href="/praatgroepen/">Praatgroepen</a>
+        <a href="/verhalen/">Verhalen</a>
+        <a href="/het-team/">Het Team</a>
+        <a href="/lid-worden/">Lid Worden</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@rouwnetwerkjong.nl">info@rouwnetwerkjong.nl</a>
+        <a href="mailto:praatgroep@rouwnetwerkjong.nl">praatgroep@rouwnetwerkjong.nl</a>
+        <div style="margin-top:16px"><h4>Links</h4>
+          <a href="/contact/">Contact</a>
+          <a href="https://rouwnetwerkjong.nl/privacyverklaring/" target="_blank" rel="noopener">Privacyverklaring</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024 Rouwnetwerk Jong. Alle rechten voorbehouden.</span>
+      <span>Non-profitorganisatie &middot; Gedreven door vrijwilligers</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', open);
+});
+document.querySelectorAll('.nav-mobile a').forEach(link => {
+  link.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', false); });
+});
+document.addEventListener('click', e => { if (!nav.contains(e.target)) { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); } });
+const fadeEls = document.querySelectorAll('.fade-up');
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+fadeEls.forEach(el => obs.observe(el));
+const path = window.location.pathname;
+document.querySelectorAll('.nav-links a, .nav-dropdown-menu a').forEach(a => {
+  if (a.getAttribute('href') === path || (path.startsWith(a.getAttribute('href')) && a.getAttribute('href') !== '/')) {
+    a.classList.add('active');
+  }
+});
+document.querySelectorAll('.nav-dropdown-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', !expanded);
+  });
+});
+</script>
+</body>
+</html>
