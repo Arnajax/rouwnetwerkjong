@@ -245,7 +245,9 @@ section { padding: 80px 0; }
 .nav-dropdown-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 8px);
+  /* Sit flush against the toggle — padding-top creates the visual gap
+     while keeping hover area continuous (no 8px dead zone) */
+  top: 100%;
   left: 0;
   min-width: 180px;
   background: rgba(250,247,244,0.98);
@@ -254,9 +256,22 @@ section { padding: 80px 0; }
   border: 0.5px solid var(--border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
+  /* padding-top provides the 8px visual breathing room */
   padding: 8px;
+  padding-top: 16px;
   z-index: 300;
 }
+/* Invisible bridge: extends hover area upward to cover the visual gap
+   between the toggle and the visible menu box */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+/* Hover lives on the parent .nav-dropdown — mouse never leaves it */
 .nav-dropdown:hover .nav-dropdown-menu {
   display: block;
 }
