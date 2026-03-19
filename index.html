@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rouwnetwerk Jong — Samen rouwen hoeft niet eenzaam te zijn</title>
+<meta name="description" content="Rouwnetwerk Jong is er voor jongeren die behoefte hebben aan een plek waar zij stil kunnen staan bij het rouwen en alles wat daarbij komt kijken.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+/* ================================================
+   RESET & BASE
+================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background-color: #FAF7F4;
+  color: #6B6058;
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ================================================
+   TYPOGRAPHY
+================================================ */
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  color: #3A342E;
+  line-height: 1.25;
+}
+
+h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); }
+h2 { font-size: clamp(1.7rem, 4vw, 2.6rem); }
+h3 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); }
+
+.section-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #8A7E72;
+  margin-bottom: 14px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #6B6058;
+}
+
+/* ================================================
+   BUTTONS
+================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 32px;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: #8A9B78;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(138,155,120,0.25);
+}
+.btn-primary:hover {
+  background: #7d8e6d;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(138,155,120,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid #8A7E72;
+  color: #4A433B;
+}
+.btn-outline:hover {
+  background: rgba(138,126,114,0.08);
+  transform: translateY(-1px);
+}
+
+/* ================================================
+   GRAIN TEXTURE UTILITY
+================================================ */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.7%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22256%22 height=%22256%22 filter=%22url(%23n)%22 opacity=%220.5%22/%3E%3C/svg%3E');
+  background-size: 128px 128px;
+}
+.grain > * { position: relative; z-index: 2; }
+
+/* ================================================
+   LAYOUT HELPERS
+================================================ */
+.container {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section { padding: 80px 0; }
+
+@media (min-width: 768px) {
+  section { padding: 100px 0; }
+}
+@media (min-width: 1024px) {
+  section { padding: 120px 0; }
+}
+
+/* ================================================
+   NAVIGATION
+================================================ */
+#nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 16px 0;
+  background: rgba(250,247,244,0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#nav.scrolled {
+  background: rgba(250,247,244,0.96);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #3A342E;
+  letter-spacing: -0.3px;
+}
+
+.nav-links {
+  display: none;
+  gap: 2px;
+}
+
+@media (min-width: 900px) {
+  .nav-links {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.nav-links a {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6B6058;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.nav-links a:hover {
+  color: #3A342E;
+  background: rgba(0,0,0,0.04);
+}
+
+.nav-links .btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+/* Hamburger */
+.nav-hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  border: none;
+  background: none;
+}
+
+@media (min-width: 900px) {
+  .nav-hamburger { display: none; }
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: #3A342E;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.nav-hamburger.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.nav-hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-hamburger.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile menu */
+.nav-mobile {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(250,247,244,0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  padding: 16px 24px 24px;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.nav-mobile.open {
+  display: flex;
+}
+
+.nav-mobile a {
+  padding: 12px 16px;
+  font-size: 16px;
+  color: #4A433B;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.nav-mobile a:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.nav-mobile .btn {
+  margin-top: 8px;
+  text-align: center;
+  justify-content: center;
+}
+
+/* ================================================
+   HERO
+================================================ */
+#home {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(160deg, #F2DED4 0%, #EDD8CE 20%, #E8DDD6 40%, #DDE3D6 60%, #D6DED0 75%, #E5DBD8 90%, #DFCFC8 100%);
+  padding-top: 100px;
+}
+
+.hero-blobs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-blob-1 {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  top: -10%;
+  right: -15%;
+  background: radial-gradient(circle, rgba(228,190,175,0.28) 0%, transparent 65%);
+  border-radius: 50%;
+}
+
+.hero-blob-2 {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  bottom: 0;
+  left: -10%;
+  background: radial-gradient(circle, rgba(198,210,188,0.25) 0%, transparent 65%);
+  border-radius: 50%;
+}
+
+.hero-blob-3 {
+  position: absolute;
+  width: 35vw;
+  height: 35vw;
+  top: 40%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(220,208,220,0.2) 0%, transparent 65%);
+  border-radius: 50%;
+}
+
+.hero-content {
+  max-width: 700px;
+  padding-top: 40px;
+}
+
+.hero-content .section-label {
+  margin-bottom: 12px;
+}
+
+.hero-content h1 {
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.hero-content p {
+  font-size: 17px;
+  max-width: 520px;
+  margin-bottom: 36px;
+  color: #5A5048;
+}
+
+.hero-tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8A7E72;
+  margin-top: 32px;
+}
+
+.hero-tagline::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 0.5px;
+  background: #8A7E72;
+}
+
+/* ================================================
+   HULPMIDDELEN
+================================================ */
+#hulpmiddelen {
+  background: #FAF7F4;
+}
+
+.hulpmiddelen-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.hulpmiddelen-header h2 {
+  margin-bottom: 12px;
+}
+
+.hulpmiddelen-header p {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.hulpmiddelen-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .hulpmiddelen-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+}
+
+.hulpmiddel-card {
+  background: rgba(255,255,255,0.7);
+  border: 0.5px solid rgba(0,0,0,0.06);
+  border-radius: 20px;
+  padding: 28px 20px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.hulpmiddel-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+}
+
+.hulpmiddel-icon-wrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hulpmiddel-blob {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.hulpmiddel-icon-wrap svg {
+  position: relative;
+  z-index: 1;
+}
+
+.hulpmiddel-card h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3A342E;
+  margin-bottom: 4px;
+}
+
+.hulpmiddel-card .sub {
+  font-size: 13px;
+  color: #8A7E72;
+}
+
+/* ================================================
+   QUOTE / MISSIE
+================================================ */
+#missie {
+  background: linear-gradient(135deg, #EDD8CE 0%, #E8DDD6 50%, #DDE3D6 100%);
+  padding: 80px 0;
+}
+
+.quote-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 120px;
+  line-height: 0.7;
+  color: rgba(74,67,59,0.12);
+  user-select: none;
+  display: block;
+  margin-bottom: -20px;
+}
+
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 3.5vw, 2rem);
+  font-style: italic;
+  font-weight: 400;
+  color: #3A342E;
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+
+.quote-sub {
+  font-size: 15px;
+  color: #6B6058;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* ================================================
+   PRAATGROEPEN
+================================================ */
+#praatgroepen {
+  background: linear-gradient(150deg, #DDE3D6 0%, #D6DED0 40%, #E5DBD8 80%, #DFCFC8 100%);
+}
+
+.praatgroepen-inner {
+  display: grid;
+  gap: 48px;
+}
+
+@media (min-width: 900px) {
+  .praatgroepen-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+}
+
+.praatgroep-text h2 {
+  margin-bottom: 16px;
+}
+
+.praatgroep-text p {
+  margin-bottom: 28px;
+}
+
+.praatgroep-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.avatar-stack {
+  display: flex;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #FAF7F4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #4A433B;
+  margin-left: -10px;
+  flex-shrink: 0;
+}
+
+.avatar:first-child { margin-left: 0; }
+
+.avatar-peach { background: linear-gradient(135deg, #F2DED4, #EDD8CE); }
+.avatar-sage  { background: linear-gradient(135deg, #DDE3D6, #D6DED0); }
+.avatar-lav   { background: linear-gradient(135deg, #E8DDD6, #E5DBD8); }
+
+.meta-text {
+  font-size: 14px;
+  color: #6B6058;
+}
+
+.meta-text strong {
+  display: block;
+  font-weight: 500;
+  color: #3A342E;
+  font-size: 13px;
+}
+
+.praatgroep-card {
+  background: rgba(255,255,255,0.65);
+  border: 0.5px solid rgba(0,0,0,0.06);
+  border-radius: 20px;
+  padding: 28px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.praatgroep-card-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.praatgroep-card-label svg { flex-shrink: 0; }
+.praatgroep-card-label span {
+  font-size: 13px;
+  font-weight: 500;
+  color: #3A342E;
+}
+
+.aanmeld-info {
+  font-size: 13.5px;
+  color: #6B6058;
+  line-height: 1.7;
+  border-top: 0.5px solid rgba(0,0,0,0.06);
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.aanmeld-info a {
+  color: #8A9B78;
+  text-decoration: underline;
+  text-decoration-color: rgba(138,155,120,0.4);
+}
+
+.wachtlijst-notice {
+  background: rgba(138,155,120,0.1);
+  border: 0.5px solid rgba(138,155,120,0.2);
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 13.5px;
+  color: #5a6d4d;
+  margin-bottom: 20px;
+  line-height: 1.65;
+}
+
+/* ================================================
+   VERHALEN
+================================================ */
+#verhalen {
+  background: #FAF7F4;
+}
+
+.verhalen-header {
+  margin-bottom: 48px;
+}
+
+.verhalen-header h2 {
+  margin-bottom: 12px;
+}
+
+.verhalen-grid {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+@media (min-width: 600px) {
+  .verhalen-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .verhalen-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.verhaal-card {
+  background: rgba(255,255,255,0.7);
+  border: 0.5px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.verhaal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+}
+
+.verhaal-tag {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8A7E72;
+  margin-bottom: 12px;
+}
+
+.verhaal-card h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3A342E;
+  margin-bottom: 8px;
+}
+
+.verhaal-card p {
+  font-size: 14px;
+  color: #8A7E72;
+  line-height: 1.65;
+}
+
+.verhaal-add {
+  background: linear-gradient(135deg, #F2DED4 0%, #E8DDD6 60%, #DDE3D6 100%);
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+@media (min-width: 600px) {
+  .verhaal-add {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.verhaal-add h3 {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  margin-bottom: 6px;
+}
+
+.verhaal-add p {
+  font-size: 14px;
+  max-width: 420px;
+}
+
+/* ================================================
+   HET TEAM
+================================================ */
+#team {
+  background: #FAF7F4;
+  padding-top: 0;
+}
+
+.team-header {
+  margin-bottom: 48px;
+}
+
+.team-header h2 {
+  margin-bottom: 12px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 600px) {
+  .team-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+
+@media (min-width: 900px) {
+  .team-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.team-card {
+  text-align: center;
+  padding: 24px 16px;
+  border-radius: 16px;
+  border: 0.5px solid rgba(0,0,0,0.06);
+  background: rgba(255,255,255,0.55);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.team-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+}
+
+.team-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 500;
+  color: #4A433B;
+}
+
+.team-card h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3A342E;
+  margin-bottom: 4px;
+}
+
+.team-card .role {
+  font-size: 13px;
+  color: #8A7E72;
+}
+
+.team-link {
+  margin-top: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #8A9B78;
+  font-weight: 500;
+  transition: gap 0.2s;
+}
+
+.team-link:hover { gap: 10px; }
+
+/* ================================================
+   LID WORDEN
+================================================ */
+#lid-worden {
+  background: linear-gradient(150deg, #F2DED4 0%, #EDD8CE 25%, #E8DDD6 50%, #DDE3D6 75%, #D6DED0 100%);
+}
+
+.lid-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.lid-inner h2 {
+  margin-bottom: 16px;
+}
+
+.lid-inner > p {
+  margin-bottom: 36px;
+  font-size: 16px;
+}
+
+.lid-voordelen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+@media (min-width: 600px) {
+  .lid-voordelen { grid-template-columns: repeat(2, 1fr); }
+}
+
+.voordeel {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255,255,255,0.5);
+  border: 0.5px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.voordeel-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(138,155,120,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.voordeel p {
+  font-size: 13.5px;
+  color: #5A5048;
+}
+
+/* ================================================
+   CONTACT
+================================================ */
+#contact {
+  background: #FAF7F4;
+}
+
+.contact-inner {
+  display: grid;
+  gap: 48px;
+}
+
+@media (min-width: 768px) {
+  .contact-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+}
+
+.contact-info h2 {
+  margin-bottom: 12px;
+}
+
+.contact-info > p {
+  margin-bottom: 32px;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.7);
+  border: 0.5px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  font-size: 14px;
+  color: #4A433B;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.contact-link:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.contact-link-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-link span {
+  flex: 1;
+}
+
+.contact-link .link-label {
+  font-size: 11px;
+  color: #8A7E72;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+}
+
+.contact-link .link-val {
+  font-size: 14px;
+  color: #3A342E;
+  font-weight: 400;
+}
+
+/* Contact form */
+.contact-form {
+  background: rgba(255,255,255,0.6);
+  border: 0.5px solid rgba(0,0,0,0.06);
+  border-radius: 20px;
+  padding: 28px;
+}
+
+.contact-form h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #3A342E;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #4A433B;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.8);
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #3A342E;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #B5AAA0;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: rgba(138,155,120,0.5);
+  box-shadow: 0 0 0 3px rgba(138,155,120,0.1);
+}
+
+.form-group textarea { min-height: 120px; }
+
+.form-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* ================================================
+   FOOTER
+================================================ */
+footer {
+  background: #4A433B;
+  color: rgba(255,255,255,0.7);
+  padding: 56px 0 32px;
+}
+
+.footer-inner {
+  display: grid;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .footer-inner {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 48px;
+  }
+}
+
+.footer-brand .nav-logo {
+  color: rgba(255,255,255,0.9);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.footer-brand p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.footer-col h4 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 16px;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover { color: rgba(255,255,255,0.95); }
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.social-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.social-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.footer-bottom {
+  border-top: 0.5px solid rgba(255,255,255,0.1);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+}
+
+@media (min-width: 600px) {
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.footer-bottom a {
+  color: rgba(255,255,255,0.45);
+  transition: color 0.2s;
+}
+
+.footer-bottom a:hover { color: rgba(255,255,255,0.8); }
+
+/* ================================================
+   SCROLL ANIMATIONS
+================================================ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-up.delay-1 { transition-delay: 0.1s; }
+.fade-up.delay-2 { transition-delay: 0.2s; }
+.fade-up.delay-3 { transition-delay: 0.3s; }
+.fade-up.delay-4 { transition-delay: 0.4s; }
+
+/* ================================================
+   DIVIDER
+================================================ */
+.divider {
+  width: 32px;
+  height: 1px;
+  background: rgba(0,0,0,0.12);
+  margin: 20px 0;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ================================================
+     NAVIGATION
+================================================ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">Rouwnetwerk Jong</a>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#hulpmiddelen">Hulpmiddelen</a>
+      <a href="#praatgroepen">Praatgroepen</a>
+      <a href="#team">Het Team</a>
+      <a href="#verhalen">Verhalen</a>
+      <a href="#contact">Contact</a>
+      <a href="#lid-worden" class="btn btn-primary">Lid Worden</a>
+    </div>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="#home" class="mobile-link">Home</a>
+    <a href="#hulpmiddelen" class="mobile-link">Hulpmiddelen</a>
+    <a href="#praatgroepen" class="mobile-link">Praatgroepen</a>
+    <a href="#team" class="mobile-link">Het Team</a>
+    <a href="#verhalen" class="mobile-link">Verhalen</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+    <a href="#lid-worden" class="btn btn-primary">Lid Worden</a>
+  </div>
+</nav>
+
+<!-- ================================================
+     HERO
+================================================ -->
+<section id="home" class="grain">
+  <div class="hero-blobs">
+    <div class="hero-blob-1"></div>
+    <div class="hero-blob-2"></div>
+    <div class="hero-blob-3"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero-content">
+      <span class="section-label fade-up">Welkom bij</span>
+      <h1 class="fade-up delay-1">Rouwnetwerk Jong</h1>
+      <p class="fade-up delay-2">Wij zijn er voor jongeren die behoefte hebben aan een plek waar zij stil kunnen staan bij het rouwen en alles wat daarbij komt kijken.</p>
+      <div class="fade-up delay-3">
+        <a href="#lid-worden" class="btn btn-primary">Lid worden</a>
+      </div>
+      <div class="hero-tagline fade-up delay-4">Een veilige, warme plek voor jong verlies</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     HULPMIDDELEN
+================================================ -->
+<section id="hulpmiddelen">
+  <div class="container">
+    <div class="hulpmiddelen-header fade-up">
+      <span class="section-label">Hulpmiddelen</span>
+      <h2>Steun die bij jou past</h2>
+      <p>We hebben een verzameling van hulpmiddelen samengesteld die kunnen helpen bij het verwerken van rouw — op jouw eigen manier en tempo.</p>
+    </div>
+
+    <div class="hulpmiddelen-grid">
+      <!-- Lezen -->
+      <div class="hulpmiddel-card fade-up delay-1">
+        <div class="hulpmiddel-icon-wrap">
+          <div class="hulpmiddel-blob" style="background: radial-gradient(circle, rgba(228,190,175,0.45) 0%, transparent 70%);"></div>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 6C6 6 10 4 16 4C22 4 26 6 26 6V26C26 26 22 24 16 24C10 24 6 26 6 26V6Z" stroke="#4A433B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 4V24" stroke="#4A433B" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M10 9C12 8.4 14 8.2 16 8.2" stroke="#4A433B" stroke-width="1.3" stroke-linecap="round" opacity="0.5"/>
+            <path d="M10 13C12 12.4 14 12.2 16 12.2" stroke="#4A433B" stroke-width="1.3" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+        <h3>Lezen</h3>
+        <span class="sub">Boeken &amp; gedichten</span>
+      </div>
+
+      <!-- Luisteren -->
+      <div class="hulpmiddel-card fade-up delay-2">
+        <div class="hulpmiddel-icon-wrap">
+          <div class="hulpmiddel-blob" style="background: radial-gradient(circle, rgba(220,210,160,0.4) 0%, transparent 70%);"></div>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 13C9 9.13 12.13 6 16 6C19.87 6 23 9.13 23 13V18" stroke="#4A433B" stroke-width="1.3" stroke-linecap="round"/>
+            <rect x="6" y="17" width="5" height="7" rx="2.5" stroke="#4A433B" stroke-width="1.3"/>
+            <rect x="21" y="17" width="5" height="7" rx="2.5" stroke="#4A433B" stroke-width="1.3"/>
+            <path d="M23 24V26C23 27.1 22.1 28 21 28H18" stroke="#4A433B" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="16" cy="28" r="1.5" stroke="#4A433B" stroke-width="1.3"/>
+          </svg>
+        </div>
+        <h3>Luisteren</h3>
+        <span class="sub">Podcasts</span>
+      </div>
+
+      <!-- Kijken -->
+      <div class="hulpmiddel-card fade-up delay-3">
+        <div class="hulpmiddel-icon-wrap">
+          <div class="hulpmiddel-blob" style="background: radial-gradient(circle, rgba(200,195,225,0.4) 0%, transparent 70%);"></div>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="7" width="24" height="16" rx="3" stroke="#4A433B" stroke-width="1.3"/>
+            <path d="M12 27H20" stroke="#4A433B" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M16 23V27" stroke="#4A433B" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M13.5 12.5L20 15.5L13.5 18.5V12.5Z" stroke="#4A433B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Kijken</h3>
+        <span class="sub">Documentaires</span>
+      </div>
+
+      <!-- Regelen -->
+      <div class="hulpmiddel-card fade-up delay-4">
+        <div class="hulpmiddel-icon-wrap">
+          <div class="hulpmiddel-blob" style="background: radial-gradient(circle, rgba(170,200,170,0.4) 0%, transparent 70%);"></div>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="11" r="5" stroke="#4A433B" stroke-width="1.3"/>
+            <path d="M6 26C6 21.58 10.48 18 16 18C21.52 18 26 21.58 26 26" stroke="#4A433B" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M21 14L23 16L27 12" stroke="#4A433B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Regelen</h3>
+        <span class="sub">Hulp &amp; info</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     QUOTE / MISSIE
+================================================ -->
+<section id="missie" class="grain">
+  <div class="container">
+    <div class="quote-wrap fade-up">
+      <span class="quote-mark">&ldquo;</span>
+      <p class="quote-text">Rouw hoeft geen eenzame ervaring te zijn — het is iets dat we samen delen en dragen.</p>
+      <p class="quote-sub">Wij brengen jongeren met elkaar in contact via praatgroepen, evenementen en samenwerkingen. Zo ontstaat een plek waar rouw geen eenzame ervaring is, maar iets dat we samen kunnen delen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     PRAATGROEPEN
+================================================ -->
+<section id="praatgroepen" class="grain">
+  <div class="container">
+    <div class="praatgroepen-inner">
+
+      <div class="praatgroep-text">
+        <span class="section-label fade-up">Praatgroepen</span>
+        <h2 class="fade-up delay-1">Samen betekenis geven aan verlies</h2>
+        <p class="fade-up delay-2">In zes tweewekelijkse bijeenkomsten delen we verhalen en vinden we (h)erkenning in een veilige omgeving. De groepen worden begeleid door jongeren met persoonlijke ervaring en/of relevante opleiding.</p>
+
+        <div class="praatgroep-meta fade-up delay-3">
+          <div class="avatar-stack">
+            <div class="avatar avatar-peach">B</div>
+            <div class="avatar avatar-sage">M</div>
+            <div class="avatar avatar-lav">S</div>
+          </div>
+          <div class="meta-text">
+            <strong>Utrecht &amp; Den Bosch</strong>
+            Begeleide bijeenkomsten
+          </div>
+        </div>
+
+        <div class="fade-up delay-4">
+          <a href="mailto:praatgroep@rouwnetwerkjong.nl" class="btn btn-primary">Aanmelden voor wachtlijst</a>
+        </div>
+      </div>
+
+      <div class="praatgroep-card fade-up delay-2">
+        <div class="wachtlijst-notice">
+          <strong style="display:block; margin-bottom:4px;">Volgende groepen starten in oktober 2026</strong>
+          Meld je aan voor de wachtlijst en ontvang als eerste updates over nieuwe praatgroepen in meer steden.
+        </div>
+
+        <div class="praatgroep-card-label">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="8.5" stroke="#4A433B" stroke-width="1.2"/>
+            <path d="M10 6V10.5L13 12.5" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <span>Inloop 19:00 · Start 19:15 · Einde 21:00</span>
+        </div>
+
+        <div class="praatgroep-card-label">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 2C7.24 2 5 4.24 5 7C5 11 10 18 10 18C10 18 15 11 15 7C15 4.24 12.76 2 10 2Z" stroke="#4A433B" stroke-width="1.2"/>
+            <circle cx="10" cy="7" r="2" stroke="#4A433B" stroke-width="1.2"/>
+          </svg>
+          <span>Utrecht (2 groepen) &amp; Den Bosch (1 groep)</span>
+        </div>
+
+        <div class="praatgroep-card-label">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M16 4H4C3.45 4 3 4.45 3 5V15C3 15.55 3.45 16 4 16H16C16.55 16 17 15.55 17 15V5C17 4.45 16.55 4 16 4Z" stroke="#4A433B" stroke-width="1.2"/>
+            <path d="M3 8H17" stroke="#4A433B" stroke-width="1.2"/>
+            <path d="M7 3V5M13 3V5" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <span>6 bijeenkomsten, tweewekelijks</span>
+        </div>
+
+        <div class="aanmeld-info">
+          Interesse? Stuur een e-mail naar <a href="mailto:praatgroep@rouwnetwerkjong.nl">praatgroep@rouwnetwerkjong.nl</a> met je naam, telefoonnummer en beschikbaarheid.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     PERSOONLIJKE VERHALEN
+================================================ -->
+<section id="verhalen">
+  <div class="container">
+    <div class="verhalen-header fade-up">
+      <span class="section-label">Persoonlijke verhalen</span>
+      <h2>Jouw verhaal telt</h2>
+      <p>Ervaringen van andere jongeren kunnen troost bieden. Herkenning vinden in andermans woorden is een krachtige stap in je eigen rouwproces.</p>
+    </div>
+
+    <div class="verhalen-grid">
+      <div class="verhaal-card fade-up delay-1">
+        <span class="verhaal-tag">Persoonlijk verhaal</span>
+        <h3>Het verhaal van Bart</h3>
+        <p>Op jonge leeftijd moest ik leren leven zonder mijn vader. Zijn vertrek bracht een mengeling van emoties teweeg. Het rouwproces bleek eenzamer dan verwacht...</p>
+      </div>
+      <div class="verhaal-card fade-up delay-2">
+        <span class="verhaal-tag">Persoonlijk verhaal</span>
+        <h3>Het verhaal van Iris</h3>
+        <p>Plotseling, op een nietsvermoedende zondag in maart, viel mijn vader weg uit mijn leven. Ik was 16 jaar jong. Ik leefde in twee werelden...</p>
+      </div>
+      <div class="verhaal-card fade-up delay-3">
+        <span class="verhaal-tag">Persoonlijk verhaal</span>
+        <h3>Het verhaal van Rim</h3>
+        <p>Het was in de verhalen van anderen die hetzelfde hadden meegemaakt dat ik mijn soms lastig te plaatsen gevoelens kon herkennen...</p>
+      </div>
+    </div>
+
+    <div class="verhaal-add fade-up grain">
+      <div>
+        <h3>Deel jouw ervaring</h3>
+        <p>Jouw verhaal kan anderen helpen. Lees ervaringen van andere jongeren of deel je eigen verhaal met onze community.</p>
+      </div>
+      <a href="mailto:info@rouwnetwerkjong.nl" class="btn btn-outline">Verhaal delen</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     HET TEAM
+================================================ -->
+<section id="team">
+  <div class="container">
+    <div class="team-header fade-up">
+      <span class="section-label">Het team</span>
+      <h2>Gedreven door persoonlijke ervaring</h2>
+      <p>Ons team bestaat uit vrijwilligers die allemaal hun eigen verhaal met verlies en rouw kennen. Vanuit die gedeelde ervaring werken we aan een toegankelijk netwerk voor jongeren.</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card fade-up delay-1">
+        <div class="team-avatar" style="background: linear-gradient(135deg, #F2DED4, #EDD8CE);">B</div>
+        <h3>Bart</h3>
+        <span class="role">Oprichter</span>
+      </div>
+      <div class="team-card fade-up delay-2">
+        <div class="team-avatar" style="background: linear-gradient(135deg, #DDE3D6, #D6DED0);">J</div>
+        <h3>Jojanneke</h3>
+        <span class="role">Teamlid</span>
+      </div>
+      <div class="team-card fade-up delay-3">
+        <div class="team-avatar" style="background: linear-gradient(135deg, #E8DDD6, #E5DBD8);">M</div>
+        <h3>Margo</h3>
+        <span class="role">Teamlid</span>
+      </div>
+      <div class="team-card fade-up delay-4">
+        <div class="team-avatar" style="background: linear-gradient(135deg, #DDE3D6, #D6DED0);">S</div>
+        <h3>Sophie</h3>
+        <span class="role">Teamlid</span>
+      </div>
+    </div>
+
+    <div class="fade-up" style="margin-top: 32px;">
+      <a href="https://rouwnetwerkjong.nl/het-team/" class="team-link" target="_blank" rel="noopener">
+        Bekijk het hele team
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8H13M9 4L13 8L9 12" stroke="#8A9B78" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     LID WORDEN
+================================================ -->
+<section id="lid-worden" class="grain">
+  <div class="container">
+    <div class="lid-inner">
+      <span class="section-label fade-up">Lid worden</span>
+      <h2 class="fade-up delay-1">Word lid van Rouwnetwerk Jong</h2>
+      <p class="fade-up delay-2">Als lid van Rouwnetwerk Jong maak je deel uit van een warme community van jongeren die begrijpen wat rouw betekent. Je ontvangt updates over praatgroepen, evenementen en nieuwe hulpmiddelen.</p>
+
+      <div class="lid-voordelen fade-up delay-3">
+        <div class="voordeel">
+          <div class="voordeel-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M8 2C5.24 2 3 4.24 3 7C3 10 8 14 8 14C8 14 13 10 13 7C13 4.24 10.76 2 8 2Z" stroke="#8A9B78" stroke-width="1.2"/>
+              <circle cx="8" cy="7" r="1.5" stroke="#8A9B78" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <p>Toegang tot praatgroepen in Utrecht en Den Bosch</p>
+        </div>
+        <div class="voordeel">
+          <div class="voordeel-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#8A9B78" stroke-width="1.2"/>
+              <path d="M2 6H14" stroke="#8A9B78" stroke-width="1.2"/>
+              <path d="M5.5 1.5V4.5M10.5 1.5V4.5" stroke="#8A9B78" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p>Updates over evenementen en nieuwe initiatieven</p>
+        </div>
+        <div class="voordeel">
+          <div class="voordeel-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="6" r="3" stroke="#8A9B78" stroke-width="1.2"/>
+              <path d="M2.5 14C2.5 11.52 5 9.5 8 9.5C11 9.5 13.5 11.52 13.5 14" stroke="#8A9B78" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p>Verbinding met een warme community van leeftijdsgenoten</p>
+        </div>
+        <div class="voordeel">
+          <div class="voordeel-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M8 2L6 6H2L5 9L4 13L8 11L12 13L11 9L14 6H10L8 2Z" stroke="#8A9B78" stroke-width="1.2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p>Persoonlijke verhalen en herkenning van anderen</p>
+        </div>
+      </div>
+
+      <div class="fade-up delay-4">
+        <a href="https://rouwnetwerkjong.nl/lid-worden/" class="btn btn-primary" target="_blank" rel="noopener">Lid worden</a>
+      </div>
+
+      <p class="fade-up" style="margin-top: 20px; font-size: 13px; color: #8A7E72;">Gratis, laagdrempelig en vrijblijvend. Rouwnetwerk Jong is een non-profitorganisatie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     CONTACT
+================================================ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+
+      <div class="contact-info">
+        <span class="section-label fade-up">Contact</span>
+        <h2 class="fade-up delay-1">Neem contact op</h2>
+        <p class="fade-up delay-2">Heb je vragen, opmerkingen of wil je bijdragen aan het netwerk? We horen graag van je.</p>
+
+        <div class="contact-links fade-up delay-3">
+          <a href="mailto:info@rouwnetwerkjong.nl" class="contact-link">
+            <div class="contact-link-icon" style="background: linear-gradient(135deg, #F2DED4, #EDD8CE);">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <rect x="2" y="4" width="14" height="10" rx="2" stroke="#4A433B" stroke-width="1.2"/>
+                <path d="M2 6L9 10.5L16 6" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span>
+              <span class="link-label">Algemeen</span>
+              <span class="link-val">info@rouwnetwerkjong.nl</span>
+            </span>
+          </a>
+
+          <a href="mailto:praatgroep@rouwnetwerkjong.nl" class="contact-link">
+            <div class="contact-link-icon" style="background: linear-gradient(135deg, #DDE3D6, #D6DED0);">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <rect x="2" y="4" width="14" height="10" rx="2" stroke="#4A433B" stroke-width="1.2"/>
+                <path d="M2 6L9 10.5L16 6" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span>
+              <span class="link-label">Praatgroepen</span>
+              <span class="link-val">praatgroep@rouwnetwerkjong.nl</span>
+            </span>
+          </a>
+
+          <a href="https://www.instagram.com/rouwnetwerkjong/" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link-icon" style="background: linear-gradient(135deg, #E8DDD6, #E5DBD8);">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <rect x="3" y="3" width="12" height="12" rx="3.5" stroke="#4A433B" stroke-width="1.2"/>
+                <circle cx="9" cy="9" r="3" stroke="#4A433B" stroke-width="1.2"/>
+                <circle cx="13" cy="5" r="0.75" fill="#4A433B"/>
+              </svg>
+            </div>
+            <span>
+              <span class="link-label">Instagram</span>
+              <span class="link-val">@rouwnetwerkjong</span>
+            </span>
+          </a>
+
+          <a href="https://www.facebook.com/rouwnetwerkjong" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link-icon" style="background: linear-gradient(135deg, #F2DED4, #EDD8CE);">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <rect x="3" y="3" width="12" height="12" rx="3" stroke="#4A433B" stroke-width="1.2"/>
+                <path d="M10.5 7H9.5C9.22 7 9 7.22 9 7.5V9H10.5L10.25 10.5H9V14" stroke="#4A433B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span>
+              <span class="link-label">Facebook</span>
+              <span class="link-val">Rouwnetwerk Jong</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form fade-up delay-2">
+        <h3>Stuur een bericht</h3>
+        <form id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="naam">Naam</label>
+            <input type="text" id="naam" name="naam" placeholder="Jouw naam" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mailadres</label>
+            <input type="email" id="email" name="email" placeholder="jouw@email.nl" required>
+          </div>
+          <div class="form-group">
+            <label for="bericht">Bericht</label>
+            <textarea id="bericht" name="bericht" placeholder="Schrijf hier je bericht..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">Verstuur bericht</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     FOOTER
+================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <span class="nav-logo">Rouwnetwerk Jong</span>
+        <p>Een veilige, warme plek voor jongeren die rouwen. Non-profit, gedreven door vrijwilligers met eigen ervaring.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/rouwnetwerkjong/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="2" width="12" height="12" rx="3.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/>
+              <circle cx="8" cy="8" r="2.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/>
+              <circle cx="11.5" cy="4.5" r="0.6" fill="rgba(255,255,255,0.7)"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/rouwnetwerkjong" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="2" width="12" height="12" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/>
+              <path d="M9.5 6H8.75C8.47 6 8.25 6.22 8.25 6.5V8H9.75L9.5 9.5H8.25V13" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/company/rouwnetwerk-jong/" class="social-btn" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="2" width="12" height="12" rx="2.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/>
+              <path d="M5 7V11M5 5.5V5.49" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M8 11V8.5C8 7.67 8.67 7 9.5 7C10.33 7 11 7.67 11 8.5V11" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigatie</h4>
+        <a href="#home">Home</a>
+        <a href="#hulpmiddelen">Hulpmiddelen</a>
+        <a href="#praatgroepen">Praatgroepen</a>
+        <a href="#verhalen">Verhalen</a>
+        <a href="#team">Het Team</a>
+        <a href="#lid-worden">Lid Worden</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@rouwnetwerkjong.nl">info@rouwnetwerkjong.nl</a>
+        <a href="mailto:praatgroep@rouwnetwerkjong.nl">praatgroep@rouwnetwerkjong.nl</a>
+        <div style="margin-top: 16px;">
+          <h4>Links</h4>
+          <a href="https://rouwnetwerkjong.nl/privacyverklaring/" target="_blank" rel="noopener">Privacyverklaring</a>
+          <a href="https://rouwnetwerkjong.nl/het-team/" target="_blank" rel="noopener">Heel het team</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2024 Rouwnetwerk Jong. Alle rechten voorbehouden.</span>
+      <span>Non-profitorganisatie &middot; Gedreven door vrijwilligers</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================================================
+     JAVASCRIPT
+================================================ -->
+<script>
+// ── Nav scroll state ──────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+// ── Hamburger menu ────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', open);
+});
+
+// Close mobile menu on link click
+document.querySelectorAll('.mobile-link, .nav-mobile .btn').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
+  });
+});
+
+// Close on outside click
+document.addEventListener('click', (e) => {
+  if (!nav.contains(e.target)) {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+  }
+});
+
+// ── Smooth scroll for anchor links ────────────────
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 72;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+// ── Scroll fade-in animations ─────────────────────
+const fadeEls = document.querySelectorAll('.fade-up');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+fadeEls.forEach(el => observer.observe(el));
+
+// ── Contact form ───────────────────────────────────
+const form = document.getElementById('contactForm');
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const naam = document.getElementById('naam').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const bericht = document.getElementById('bericht').value.trim();
+
+  if (!naam || !email || !bericht) return;
+
+  const subject = encodeURIComponent('Bericht via Rouwnetwerk Jong website');
+  const body = encodeURIComponent(`Naam: ${naam}\nE-mail: ${email}\n\nBericht:\n${bericht}`);
+  window.location.href = `mailto:info@rouwnetwerkjong.nl?subject=${subject}&body=${body}`;
+});
+</script>
+
+</body>
+</html>
